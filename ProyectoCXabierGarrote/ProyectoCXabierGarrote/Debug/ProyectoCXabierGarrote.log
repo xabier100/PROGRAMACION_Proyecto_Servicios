@@ -1,0 +1,8 @@
+﻿  PrincipalC.c
+C:\Xabier\FP\OneDrive - Centro de Estudios SEIM\Programacion\ProyectoC\ProyectoCXabierGarrote\ProyectoCXabierGarrote\PrincipalC.c(8,64): error C2065: 'mostrarMenuClientes': identificador no declarado
+C:\Xabier\FP\OneDrive - Centro de Estudios SEIM\Programacion\ProyectoC\ProyectoCXabierGarrote\ProyectoCXabierGarrote\PrincipalC.c(8,85): error C2065: 'mostrarMenuServicios': identificador no declarado
+C:\Xabier\FP\OneDrive - Centro de Estudios SEIM\Programacion\ProyectoC\ProyectoCXabierGarrote\ProyectoCXabierGarrote\PrincipalC.c(8,98): error C2065: 'presupuestos': identificador no declarado
+C:\Xabier\FP\OneDrive - Centro de Estudios SEIM\Programacion\ProyectoC\ProyectoCXabierGarrote\ProyectoCXabierGarrote\PrincipalC.c(8,109): error C2065: 'facuracion': identificador no declarado
+C:\Xabier\FP\OneDrive - Centro de Estudios SEIM\Programacion\ProyectoC\ProyectoCXabierGarrote\ProyectoCXabierGarrote\PrincipalC.c(8,1): warning C4047: 'inicializando': 'void (__cdecl *)()' es distinto en los niveles de direccionamiento indirecto de 'int'
+C:\Xabier\FP\OneDrive - Centro de Estudios SEIM\Programacion\ProyectoC\ProyectoCXabierGarrote\ProyectoCXabierGarrote\PrincipalC.c(31,9): warning C4013: 'GotoXY' sin definir; se supone que extern devuelve como resultado int
+C:\Xabier\FP\OneDrive - Centro de Estudios SEIM\Programacion\ProyectoC\ProyectoCXabierGarrote\ProyectoCXabierGarrote\PrincipalC.c(36,6): error C2371: 'GotoXY': nueva definición; tipos básicos distintos
