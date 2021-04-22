@@ -139,10 +139,17 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="funciones.c">
+      <SubType>
+      </SubType>
+    </ClCompile>
     <ClCompile Include="PrincipalC.c">
       <SubType>
       </SubType>
     </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="funciones.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
