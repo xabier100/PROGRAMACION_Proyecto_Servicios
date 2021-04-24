@@ -2,13 +2,23 @@
 #include <stdio.h>
 #include "funciones.h"
 #include <windows.h>
-void mostrarMenu()
+#define TAM_OPCIONES_CLIENTES 4
+void mostrarOpcionesPrincipales()
 {
-	printf("MENU FACURACION\n");
-	printf("1-Clientes\n2-Servicios\n");
-	printf("3-Presupuestos\n4-Facuracion\n5-Salir\n");
+	GotoXY(5, 0);
+	printf("MENU DE FACURACION\n");
+	GotoXY(7, 1);
+	printf("1-Clientes\n");
+	GotoXY(7, 2);
+	printf("2-Servicios\n");
+	GotoXY(7, 3);
+	printf("3-Presupuestos\n");
+	GotoXY(7, 4);
+	printf("4-Facuracion\n");
+	GotoXY(7, 5);
+	printf("5-Salir\n");
 }
-int pedirOpcion() {
+int pedirOpcionPrincipal() {
 	int opc;
 	printf("Introduce Opcion: [ ]");
 	do
@@ -26,15 +36,31 @@ void GotoXY(int x, int  y)
 	HANDLE h = GetStdHandle(STD_OUTPUT_HANDLE);/*Manejador del sistema en la consola*/
 	SetConsoleCursorPosition(h, p);
 }
-void funcion1() {
-	printf("Funcion1");
-}
-void funcion2() {
-	printf("Funcion2");
-}
-void funcion3() {
-	printf("Funcion3");
-}
-void funcion4() {
-	printf("Funcion4");
+
+//void funcion1() {
+//	printf("Funcion1");
+//}
+//void funcion2() {
+//	printf("Funcion2");
+//}
+//void funcion3() {
+//	printf("Funcion3");
+//}
+//void funcion4() {
+//	printf("Funcion4");
+//}
+
+void mostrarMenuClientes(){
+	void (*menuPuntero[TAM_OPCIONES_CLIENTES - 1])() = { funcion1,funcion2,funcion3,funcion4 };
+
+	mostrarOpcionesClientes();
+	int opc = pedirOpcionClientes();
+	while (opc != 5)
+	{
+		(*menuPuntero[opc - 1])();
+		getch();
+		system("cls");
+		mostrarOpcionesClientes();
+		opc = pedirOpcionClientes();
+	}
 }

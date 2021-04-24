@@ -1,0 +1,27 @@
+Proyecto Proyectos
+
+Desarrollar una aplicación de gestión de matriculaciones y notas según el enunciado adjunto. 
+
+Los criterios son los que se explican:
+
+Requisitos mínimos:
+
+ Nivel 1: Documentación completa + mantenimientos (opciones 1 y 2 del menú) funcionando correctamente. (sobre 5 Puntos).
+
+
+Nivel 2: Apartado anterior + 3 funcionando al 100% (opción 3 del menú) (sobre 7 puntos). 
+
+Nivel 3: Apartados anteriores + 4 funcionando al 100% (opción 4 del menú) (sobre 8 puntos).
+
+Nivel 4: Los apartados anteriores + funcionalidades adicionales (bajas, informes extra a parte de los que se piden,consultas) (sobre 9 puntos)
+
+- Calidad de la documentación y presentación (aspecto de las pantallas, diseño de informes, etc...) 1 Punto adicional.
+
+La calidad de la documentación y el diseño puntuarán siempre 1 punto adicional.
+
+Temporización recomendada:
+
+    Apartados 1 y 2: 24 de abril.
+    Apartado 3: 11 de mayo.
+    Apartado 4: 27 de mayo.
+    Documentación: 1 junio.
