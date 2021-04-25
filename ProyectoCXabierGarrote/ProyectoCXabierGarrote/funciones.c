@@ -37,30 +37,52 @@ void GotoXY(int x, int  y)
 	SetConsoleCursorPosition(h, p);
 }
 
-//void funcion1() {
-//	printf("Funcion1");
-//}
-//void funcion2() {
-//	printf("Funcion2");
-//}
-//void funcion3() {
-//	printf("Funcion3");
-//}
-//void funcion4() {
-//	printf("Funcion4");
-//}
+void funcion1() {
+	printf("Funcion1");
+}
+void funcion2() {
+	printf("Funcion2");
+}
+void funcion3() {
+	printf("Funcion3");
+}
+void funcion4() {
+	printf("Funcion4");
+}
 
 void mostrarMenuClientes(){
-	void (*menuPuntero[TAM_OPCIONES_CLIENTES - 1])() = { funcion1,funcion2,funcion3,funcion4 };
+	void (*menuPuntero[TAM_OPCIONES_CLIENTES - 1])() = { funcion1,funcion2,funcion3};
 
 	mostrarOpcionesClientes();
 	int opc = pedirOpcionClientes();
-	while (opc != 5)
+	while (opc != TAM_OPCIONES_CLIENTES)
 	{
+		system("cls");
 		(*menuPuntero[opc - 1])();
 		getch();
-		system("cls");
 		mostrarOpcionesClientes();
 		opc = pedirOpcionClientes();
 	}
+}
+void mostrarOpcionesClientes() {
+	GotoXY(5, 0);
+	printf("MENU DE CLIENTES\n");
+	GotoXY(7, 1);
+	printf("1-ALTAS\n");
+	GotoXY(7, 2);
+	printf("2-MODIFICAR\n");
+	GotoXY(7, 3);
+	printf("3-CONSULTAR\n");
+	GotoXY(7, 4);
+	printf("4-SALIR\n");
+}
+int pedirOpcionClientes() {
+	int opc;
+	printf("Introduce Opcion: [ ]");
+	do
+	{
+		GotoXY(19, 5);
+		scanf("%d", &opc);
+	} while (opc < 1 || opc>4);
+	return opc;
 }
