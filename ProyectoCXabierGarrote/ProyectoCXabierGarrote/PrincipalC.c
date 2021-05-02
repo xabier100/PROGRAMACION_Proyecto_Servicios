@@ -7,7 +7,7 @@ void mostrarOpcionesPrincipales();
 int pedirOpcionPrincipal();
 main() {
 	/*void (*menuPuntero[TAM_OPCIONES - 1])() = {mostrarMenuClientes,mostrarMenuServicios,presupuestos,facuracion};*/
-	void (*menuPuntero[TAM_OPCIONES - 1])() = { mostrarMenuClientes,funcion2,funcion3,funcion4 };
+	void (*menuPuntero[TAM_OPCIONES - 1])() = { mostrarMenuClientes,mostrarMenuServicios,funcion3,funcion4 };
 
 	mostrarOpcionesPrincipales();
 	int opc = pedirOpcionPrincipal();

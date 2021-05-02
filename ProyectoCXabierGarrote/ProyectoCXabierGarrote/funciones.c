@@ -1,8 +1,7 @@
 #define _CRT_SECURE_NO_WARNINGS
 #include <stdio.h>
 #include "funciones.h"
-#include <windows.h>
-#define TAM_OPCIONES_CLIENTES 4
+
 void mostrarOpcionesPrincipales()
 {
 	GotoXY(5, 0);
@@ -85,4 +84,47 @@ int pedirOpcionClientes() {
 		scanf("%d", &opc);
 	} while (opc < 1 || opc>4);
 	return opc;
+}
+
+void mostrarMenuServicios() {
+	void (*menuPuntero[TAM_OPCIONES_SERVICIOS - 1])() = { funcion1,funcion2,funcion3 };
+
+	mostrarOpcionesServicios();
+	int opc = pedirOpcionServicios();
+	while (opc != TAM_OPCIONES_SERVICIOS)
+	{
+		system("cls");
+		(*menuPuntero[opc - 1])();
+		getch();
+		mostrarOpcionesServicios();
+		opc = pedirOpcionServicios();
+	}
+}
+
+int pedirOpcionServicios() {
+	int opc;
+	printf("Introduce Opcion: [ ]");
+	do
+	{
+		GotoXY(19, 5);
+		scanf("%d", &opc);
+	} while (opc < 1 || opc>4);
+	return opc;
+}
+
+void mostrarOpcionesServicios() {
+	GotoXY(5, 0);
+	printf("MENU DE SERVICIOS\n");
+	GotoXY(7, 1);
+	printf("1-ALTAS\n");
+	GotoXY(7, 2);
+	printf("2-MODIFICAR\n");
+	GotoXY(7, 3);
+	printf("3-CONSULTAR\n");
+	GotoXY(7, 4);
+	printf("4-SALIR\n");
+}
+
+void darDeAltaCliente() {
+
 }
