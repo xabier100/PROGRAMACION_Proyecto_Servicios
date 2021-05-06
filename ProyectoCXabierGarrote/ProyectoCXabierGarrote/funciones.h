@@ -19,6 +19,17 @@ typedef struct {
 	char municipio[TAM_CLIENTE_MUNICIPIO];
 	char nif[TAM_CLIENTE_NIF];
 }CLIENTE;
+
+/*Definimos la estructura servicios 
+con sus correspondiente constantes*/
+#define TAM_SERVICIO_DENOMINACION 20
+typedef struct {
+	int nServicio;
+	char denominacion[TAM_SERVICIO_DENOMINACION];
+	float precioCoste;
+	float pvp;
+}SERVICIO;
+
 void mostrarOpcionesPrincipales();
 int pedirOpcionPrincipal();
 void GotoXY(int x, int  y);
