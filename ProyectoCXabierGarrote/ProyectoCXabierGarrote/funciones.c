@@ -220,3 +220,39 @@ void modificarCliente() {
 	/*Imprimir mensaje confirmando que todo ha salido bien*/
 	printf("Cliente modificado con exito");
 }
+
+void consultarCliente() {
+	FILE* pf;
+	CLIENTE reg;
+	/*Intentamos abrir el fichero en modo lectura escritura*/
+	pf = fopen(RUTA_CLIENTES, "rb+");
+
+	if (pf == NULL) {/*Si da error es imposible modificar porque no existe el fichero*/
+		printf("Error no se puede modificar ningun cliente porque no existe el fichero");
+		return;
+	}
+	int tamFichero = calcularTamañoFichero(pf);
+
+	/*Calcular numero del ultimo cliente*/
+	int numUltimoCliente = tamFichero / sizeof(reg);
+
+	/*Pedir numero cliente*/
+	int pos = pedirNumCliente();
+
+	if (pos<1 || pos>numUltimoCliente)
+	{
+		printf("Error el numero de cliente no esta entre los existentes");
+		return;
+	}
+	/*Nos situamos en el cliente que nos ha insertado el usuario */
+	fseek(pf, sizeof(reg) * (pos - 1), SEEK_SET);
+
+	/*Leemos los datos del cliente solicitado*/
+	fread(&reg, sizeof(reg), 1, pf);
+
+	imprimirDatos(reg);
+
+	printf("Desea continuar?");
+
+	getch();
+}

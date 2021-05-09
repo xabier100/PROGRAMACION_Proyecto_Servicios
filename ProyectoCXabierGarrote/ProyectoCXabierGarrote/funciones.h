@@ -3,7 +3,6 @@
 #define TAM_OPCIONES_CLIENTES 4
 #define TAM_OPCIONES_SERVICIOS 4
 #define RUTA_CLIENTES "clientes.dat"
-#define TAM_FICHERO_CLIENTES 100
 /*Definimos la estructura cliente con 
 sus correspondientes constantes*/
 #define TAM_CLIENTE_NOMBRE 20
@@ -49,3 +48,4 @@ long calcularTamañoFichero(FILE *pf);
 void modificarCliente();
 int pedirNumCliente();
 void pedirDatosModificar(CLIENTE *reg);
+void consultarCliente();
