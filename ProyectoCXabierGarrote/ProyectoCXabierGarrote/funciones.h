@@ -3,6 +3,7 @@
 #define TAM_OPCIONES_CLIENTES 4
 #define TAM_OPCIONES_SERVICIOS 4
 #define RUTA_CLIENTES "clientes.dat"
+#define RUTA_SERVICIOS "servicios.dat"
 /*Definimos la estructura cliente con 
 sus correspondientes constantes*/
 #define TAM_CLIENTE_NOMBRE 20
@@ -49,3 +50,5 @@ void modificarCliente();
 int pedirNumCliente();
 void pedirDatosModificar(CLIENTE *reg);
 void consultarCliente();
+void darDeAltaServicio();
+void pedirDatosServicio(int numSiguienteServicio, SERVICIO* reg);
