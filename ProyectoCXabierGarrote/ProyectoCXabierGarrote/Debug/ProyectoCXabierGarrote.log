@@ -1,6 +1,4 @@
 ﻿  funciones.c
-C:\Xabier\FP\OneDrive - Centro de Estudios SEIM\Programacion\ProyectoC\ProyectoCXabierGarrote\ProyectoCXabierGarrote\funciones.c(63,8): warning C4013: 'getch' sin definir; se supone que extern devuelve como resultado int
-  PrincipalC.c
-C:\Xabier\FP\OneDrive - Centro de Estudios SEIM\Programacion\ProyectoC\ProyectoCXabierGarrote\ProyectoCXabierGarrote\PrincipalC.c(19,8): warning C4013: 'getch' sin definir; se supone que extern devuelve como resultado int
-  Generando código...
+C:\Xabier\FP\OneDrive - Centro de Estudios SEIM\Programacion\ProyectoC\ProyectoCXabierGarrote\ProyectoCXabierGarrote\funciones.c(61,8): warning C4013: 'getch' sin definir; se supone que extern devuelve como resultado int
+C:\Xabier\FP\OneDrive - Centro de Estudios SEIM\Programacion\ProyectoC\ProyectoCXabierGarrote\ProyectoCXabierGarrote\funciones.c(178,6): warning C4013: 'gets' sin definir; se supone que extern devuelve como resultado int
   ProyectoCXabierGarrote.vcxproj -> C:\Xabier\FP\OneDrive - Centro de Estudios SEIM\Programacion\ProyectoC\ProyectoCXabierGarrote\Debug\ProyectoCXabierGarrote.exe

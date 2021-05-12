@@ -43,13 +43,25 @@ int pedirOpcionClientes();
 void mostrarMenuServicios();
 void mostrarOpcionesServicios();
 int pedirOpcionServicios();
+
 void darDeAltaCliente();
 void pedirDatosCliente(int numSiguienteCliente,CLIENTE *reg);
+
 long calcularTamañoFichero(FILE *pf);
+
 void modificarCliente();
 int pedirNumCliente();
 void pedirDatosModificarCliente(CLIENTE *reg);
+
 void consultarCliente();
+void imprimirDatosCliente(CLIENTE reg);
+
 void darDeAltaServicio();
 void pedirDatosServicio(int numSiguienteServicio, SERVICIO* reg);
+
 void modificarServicio();
+int pedirNumServicio();
+void pedirDatosModificarServicio(SERVICIO* reg);
+
+void consultarServicio();
+void imprimirDatosServicio(SERVICIO reg);
