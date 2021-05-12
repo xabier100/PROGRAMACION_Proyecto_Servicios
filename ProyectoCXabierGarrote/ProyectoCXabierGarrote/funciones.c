@@ -206,7 +206,7 @@ void modificarCliente() {
 	/*Leemos los datos del cliente solicitado*/
 	fread(&reg, sizeof(reg), 1, pf);
 
-	pedirDatosModificar(&reg);
+	pedirDatosModificarCliente(&reg);
 
 	/*Nos situamos en el fichero*/
 	fseek(pf, sizeof(reg) * (pos - 1), SEEK_SET);
@@ -300,7 +300,6 @@ void modificarServicio() {
 	copiado la estructura de modificar cliente importante
 	----------------------------------------------------*/
 
-
 	FILE* pf;
 	SERVICIO reg;
 	/*Intentamos abrir el fichero en modo lectura escritura*/
@@ -330,7 +329,7 @@ void modificarServicio() {
 	/*Leemos los datos del cliente solicitado*/
 	fread(&reg, sizeof(reg), 1, pf);
 
-	pedirDatosModificar(&reg);
+	pedirDatosModificarServicio(&reg);
 
 	/*Nos situamos en el fichero*/
 	fseek(pf, sizeof(reg) * (pos - 1), SEEK_SET);
