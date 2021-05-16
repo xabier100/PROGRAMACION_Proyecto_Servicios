@@ -213,51 +213,51 @@ long calcularTamañoFichero(FILE *pf) {
 	return tam;
 }
 
-void modificarCliente() {
-	FILE* pf;
-	CLIENTE reg;
-	/*Intentamos abrir el fichero en modo lectura escritura*/
-	pf= fopen(RUTA_CLIENTES, "rb+");
-
-	if (pf == NULL) {/*Si da error es imposible modificar porque no existe el fichero*/
-		printf("Error no se puede modificar ningun cliente porque no existe el fichero");
-		return;
-	}
-	int tamFichero = calcularTamañoFichero(pf);
-
-	/*Calcular numero del ultimo cliente*/
-	int numUltimoCliente = tamFichero / sizeof(reg);
-	
-	/*Pedir numero cliente*/
-	int pos = pedirNumCliente();
-
-	if (pos<1||pos>numUltimoCliente)
-	{
-		printf("Error el numero de cliente no esta entre los existentes");
-		return;
-	}
-	
-	/*Nos situamos en el cliente que nos ha insertado el usuario */
-	fseek(pf, sizeof(reg) * (pos - 1), SEEK_SET);
-
-	/*Leemos los datos del cliente solicitado*/
-	fread(&reg, sizeof(reg), 1, pf);
-
-	pedirDatosModificarCliente(&reg);
-
-	/*Nos situamos en el fichero*/
-	fseek(pf, sizeof(reg) * (pos - 1), SEEK_SET);
-
-	/*Insertamos el cliente con los datos modificados*/
-	fwrite(&reg, sizeof(reg), 1, pf);
-
-	/*Cerramos el fichero*/
-	fclose(pf);
-
-	/*Imprimir mensaje confirmando que todo ha salido bien*/
-	printf("Cliente modificado con exito");
-}
-
+//void modificarCliente() {
+//	FILE* pf;
+//	CLIENTE reg;
+//	/*Intentamos abrir el fichero en modo lectura escritura*/
+//	pf= fopen(RUTA_CLIENTES, "rb+");
+//
+//	if (pf == NULL) {/*Si da error es imposible modificar porque no existe el fichero*/
+//		printf("Error no se puede modificar ningun cliente porque no existe el fichero");
+//		return;
+//	}
+//	int tamFichero = calcularTamañoFichero(pf);
+//
+//	/*Calcular numero del ultimo cliente*/
+//	int numUltimoCliente = tamFichero / sizeof(reg);
+//	
+//	/*Pedir numero cliente*/
+//	int pos = pedirNumCliente();
+//
+//	if (pos<1||pos>numUltimoCliente)
+//	{
+//		printf("Error el numero de cliente no esta entre los existentes");
+//		return;
+//	}
+//	
+//	/*Nos situamos en el cliente que nos ha insertado el usuario */
+//	fseek(pf, sizeof(reg) * (pos - 1), SEEK_SET);
+//
+//	/*Leemos los datos del cliente solicitado*/
+//	fread(&reg, sizeof(reg), 1, pf);
+//
+//	pedirDatosModificarCliente(&reg);
+//
+//	/*Nos situamos en el fichero*/
+//	fseek(pf, sizeof(reg) * (pos - 1), SEEK_SET);
+//
+//	/*Insertamos el cliente con los datos modificados*/
+//	fwrite(&reg, sizeof(reg), 1, pf);
+//
+//	/*Cerramos el fichero*/
+//	fclose(pf);
+//
+//	/*Imprimir mensaje confirmando que todo ha salido bien*/
+//	printf("Cliente modificado con exito");
+//}
+//
 void consultarCliente() {
 	FILE* pf;
 	CLIENTE reg;
@@ -294,119 +294,149 @@ void consultarCliente() {
 	getch();
 }
 
-void darDeAltaServicio() {
-	FILE* pf;
-	SERVICIO reg;
-	/*Intentamos abrir el fichero en modo lectura escritura*/
-	pf = fopen(RUTA_SERVICIOS, "rb+");
-	if (pf == NULL)/*Si da error intentamor abrirlo en modo lectura*/
-	{
-		pf = fopen(RUTA_SERVICIOS, "wb");
-		if (pf == NULL)/*Si da error imprimir mensaje error*/
-		{
-			printf("Error de apertura");
-			return;
-		}
-	}
 
-	int tamFichero = calcularTamañoFichero(pf);
+void imprimirDatosCliente(CLIENTE reg) {
+	GotoXY(20, 0);
+	printf("CONSULTA CLIENTES");
 
-	/*Calcular numero del siguiente servicio*/
-	int posSiguienteServicio = tamFichero / sizeof(reg);
+	GotoXY(0, 2);
+	printf("%15s : %d ", "NºCliente", reg.nCliente);
 
-	/*Sacamos formulario de pedir datos del servicio*/
-	pedirDatosServicio(posSiguienteServicio+1, &reg);
+	GotoXY(0, 4);
+	printf("%15s : %-20s", "Nombre",reg.nombre);
 
-	/*Posicionarnos al final del fichero*/
-	fseek(pf, tamFichero, SEEK_SET);
+	GotoXY(0, 6);
+	printf("%15s : %-20s", "Domicilio",reg.domicilio);
 
-	/*Escribir el registro*/
-	fwrite(&reg, sizeof(reg), 1, pf);
+	GotoXY(0, 8);
+	printf("%15s : %-10s", "Codigo Postal",reg.codigoPostal);
 
-	/*Cerrar el fichero*/
-	fclose(pf);
+	GotoXY(0, 10);
+	printf("%15s : %-15s", "Municipio",reg.municipio);
 
-	/*Imprimir mensaje diciendo servicio insertado con exito*/
-	printf("Servicio insertado con exito");
+	GotoXY(0, 12);
+	printf("%15s : %-10s", "NIF",reg.nif);
 }
 
-void modificarServicio() {
-	FILE* pf;
-	SERVICIO reg;
-	/*Intentamos abrir el fichero en modo lectura escritura*/
-	pf = fopen(RUTA_SERVICIOS, "rb+");
-
-	if (pf == NULL) {/*Si da error es imposible modificar porque no existe el fichero*/
-		printf("Error no se puede modificar ningun servicio porque no existe el fichero");
-		return;
-	}
-	int tamFichero = calcularTamañoFichero(pf);
-
-	/*Calcular numero del ultimo cliente*/
-	int numUltimoServicio = tamFichero / sizeof(reg);
-
-	/*Pedir numero cliente*/
-	int pos = pedirNumServicio();
-
-	if (pos<1 || pos>numUltimoServicio)
-	{
-		printf("Error el numero de cliente no esta entre los existentes");
-		return;
-	}
-
-	/*Nos situamos en el cliente que nos ha insertado el usuario */
-	fseek(pf, sizeof(reg) * (pos - 1), SEEK_SET);
-
-	/*Leemos los datos del cliente solicitado*/
-	fread(&reg, sizeof(reg), 1, pf);
-
-	pedirDatosModificarServicio(&reg);
-
-	/*Nos situamos en el fichero*/
-	fseek(pf, sizeof(reg) * (pos - 1), SEEK_SET);
-
-	/*Insertamos el cliente con los datos modificados*/
-	fwrite(&reg, sizeof(reg), 1, pf);
-
-	/*Cerramos el fichero*/
-	fclose(pf);
-
-	/*Imprimir mensaje confirmando que todo ha salido bien*/
-	printf("Cliente modificado con exito");
+int pedirNumCliente() {
+	int numCliente;
+	printf("Introduzca numero de cliente: ");
+	scanf("%d", &numCliente);
+	return numCliente;
 }
-
-void consultarServicio() {
-	FILE* pf;
-	SERVICIO reg;
-	/*Intentamos abrir el fichero en modo lectura*/
-	pf = fopen(RUTA_SERVICIOS, "rb");
-
-	if (pf == NULL) {/*Si da error es imposible modificar porque no existe el fichero*/
-		printf("Error no se puede consultar ningun servicio porque no existe el fichero");
-		return;
-	}
-	int tamFichero = calcularTamañoFichero(pf);
-
-	/*Calcular numero del ultimo cliente*/
-	int numUltimoCliente = tamFichero / sizeof(reg);
-
-	/*Pedir numero cliente*/
-	int pos = pedirNumCliente();
-
-	if (pos<1 || pos>numUltimoCliente)
-	{
-		printf("Error el numero de servicio no esta entre los existentes");
-		return;
-	}
-	/*Nos situamos en el cliente que nos ha insertado el usuario */
-	fseek(pf, sizeof(reg) * (pos - 1), SEEK_SET);
-
-	/*Leemos los datos del cliente solicitado*/
-	fread(&reg, sizeof(reg), 1, pf);
-
-	imprimirDatosServicio(reg);
-
-	printf("Desea continuar?");
-
-	getch();
-}
+//void darDeAltaServicio() {
+//	FILE* pf;
+//	SERVICIO reg;
+//	/*Intentamos abrir el fichero en modo lectura escritura*/
+//	pf = fopen(RUTA_SERVICIOS, "rb+");
+//	if (pf == NULL)/*Si da error intentamor abrirlo en modo lectura*/
+//	{
+//		pf = fopen(RUTA_SERVICIOS, "wb");
+//		if (pf == NULL)/*Si da error imprimir mensaje error*/
+//		{
+//			printf("Error de apertura");
+//			return;
+//		}
+//	}
+//
+//	int tamFichero = calcularTamañoFichero(pf);
+//
+//	/*Calcular numero del siguiente servicio*/
+//	int posSiguienteServicio = tamFichero / sizeof(reg);
+//
+//	/*Sacamos formulario de pedir datos del servicio*/
+//	pedirDatosServicio(posSiguienteServicio+1, &reg);
+//
+//	/*Posicionarnos al final del fichero*/
+//	fseek(pf, tamFichero, SEEK_SET);
+//
+//	/*Escribir el registro*/
+//	fwrite(&reg, sizeof(reg), 1, pf);
+//
+//	/*Cerrar el fichero*/
+//	fclose(pf);
+//
+//	/*Imprimir mensaje diciendo servicio insertado con exito*/
+//	printf("Servicio insertado con exito");
+//}
+//
+//void modificarServicio() {
+//	FILE* pf;
+//	SERVICIO reg;
+//	/*Intentamos abrir el fichero en modo lectura escritura*/
+//	pf = fopen(RUTA_SERVICIOS, "rb+");
+//
+//	if (pf == NULL) {/*Si da error es imposible modificar porque no existe el fichero*/
+//		printf("Error no se puede modificar ningun servicio porque no existe el fichero");
+//		return;
+//	}
+//	int tamFichero = calcularTamañoFichero(pf);
+//
+//	/*Calcular numero del ultimo cliente*/
+//	int numUltimoServicio = tamFichero / sizeof(reg);
+//
+//	/*Pedir numero cliente*/
+//	int pos = pedirNumServicio();
+//
+//	if (pos<1 || pos>numUltimoServicio)
+//	{
+//		printf("Error el numero de cliente no esta entre los existentes");
+//		return;
+//	}
+//
+//	/*Nos situamos en el cliente que nos ha insertado el usuario */
+//	fseek(pf, sizeof(reg) * (pos - 1), SEEK_SET);
+//
+//	/*Leemos los datos del cliente solicitado*/
+//	fread(&reg, sizeof(reg), 1, pf);
+//
+//	pedirDatosModificarServicio(&reg);
+//
+//	/*Nos situamos en el fichero*/
+//	fseek(pf, sizeof(reg) * (pos - 1), SEEK_SET);
+//
+//	/*Insertamos el cliente con los datos modificados*/
+//	fwrite(&reg, sizeof(reg), 1, pf);
+//
+//	/*Cerramos el fichero*/
+//	fclose(pf);
+//
+//	/*Imprimir mensaje confirmando que todo ha salido bien*/
+//	printf("Cliente modificado con exito");
+//}
+//
+//void consultarServicio() {
+//	FILE* pf;
+//	SERVICIO reg;
+//	/*Intentamos abrir el fichero en modo lectura*/
+//	pf = fopen(RUTA_SERVICIOS, "rb");
+//
+//	if (pf == NULL) {/*Si da error es imposible modificar porque no existe el fichero*/
+//		printf("Error no se puede consultar ningun servicio porque no existe el fichero");
+//		return;
+//	}
+//	int tamFichero = calcularTamañoFichero(pf);
+//
+//	/*Calcular numero del ultimo cliente*/
+//	int numUltimoCliente = tamFichero / sizeof(reg);
+//
+//	/*Pedir numero cliente*/
+//	int pos = pedirNumCliente();
+//
+//	if (pos<1 || pos>numUltimoCliente)
+//	{
+//		printf("Error el numero de servicio no esta entre los existentes");
+//		return;
+//	}
+//	/*Nos situamos en el cliente que nos ha insertado el usuario */
+//	fseek(pf, sizeof(reg) * (pos - 1), SEEK_SET);
+//
+//	/*Leemos los datos del cliente solicitado*/
+//	fread(&reg, sizeof(reg), 1, pf);
+//
+//	imprimirDatosServicio(reg);
+//
+//	printf("Desea continuar?");
+//
+//	getch();
+//}

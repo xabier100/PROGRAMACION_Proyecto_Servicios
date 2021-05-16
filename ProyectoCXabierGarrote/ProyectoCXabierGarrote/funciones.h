@@ -8,7 +8,7 @@
 sus correspondientes constantes*/
 #define TAM_CLIENTE_NOMBRE 20
 #define TAM_CLIENTE_DOMICILIO 20
-#define TAM_CLIENTE_CP 5
+#define TAM_CLIENTE_CP 6
 #define TAM_CLIENTE_MUNICIPIO 15
 #define TAM_CLIENTE_NIF 10
 typedef struct {
@@ -49,19 +49,20 @@ void pedirDatosCliente(int numSiguienteCliente,CLIENTE *reg);
 
 long calcularTamañoFichero(FILE *pf);
 
-void modificarCliente();
-int pedirNumCliente();
-void pedirDatosModificarCliente(CLIENTE *reg);
-
+//void modificarCliente();
+//int pedirNumCliente();
+//void pedirDatosModificarCliente(CLIENTE *reg);
+//
 void consultarCliente();
 void imprimirDatosCliente(CLIENTE reg);
+int  pedirNumCliente();
 
-void darDeAltaServicio();
-void pedirDatosServicio(int numSiguienteServicio, SERVICIO* reg);
-
-void modificarServicio();
-int pedirNumServicio();
-void pedirDatosModificarServicio(SERVICIO* reg);
-
-void consultarServicio();
-void imprimirDatosServicio(SERVICIO reg);
+//void darDeAltaServicio();
+//void pedirDatosServicio(int numSiguienteServicio, SERVICIO* reg);
+//
+//void modificarServicio();
+//int pedirNumServicio();
+//void pedirDatosModificarServicio(SERVICIO* reg);
+//
+//void consultarServicio();
+//void imprimirDatosServicio(SERVICIO reg);
