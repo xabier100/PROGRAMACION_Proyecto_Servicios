@@ -23,7 +23,7 @@ main() {
 	//pedirDatosCliente(numSiguienteCliente, &reg);
 	//reg.nombre;
 
-	consultarCliente();
-	getch();
+	consultarServicio();
+	
 }
 

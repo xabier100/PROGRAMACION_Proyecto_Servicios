@@ -57,12 +57,13 @@ void consultarCliente();
 void imprimirDatosCliente(CLIENTE reg);
 int  pedirNumCliente();
 
-//void darDeAltaServicio();
-//void pedirDatosServicio(int numSiguienteServicio, SERVICIO* reg);
-//
+void darDeAltaServicio();
+void pedirDatosServicio(int numSiguienteServicio, SERVICIO* reg);
+
 //void modificarServicio();
 //int pedirNumServicio();
 //void pedirDatosModificarServicio(SERVICIO* reg);
 //
-//void consultarServicio();
-//void imprimirDatosServicio(SERVICIO reg);
+void consultarServicio();
+void imprimirDatosServicio(SERVICIO reg);
+int pedirNumServicio();

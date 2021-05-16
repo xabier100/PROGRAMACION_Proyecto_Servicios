@@ -165,33 +165,40 @@ void darDeAltaCliente() {
 
 void pedirDatosCliente(int numSiguienteCliente, CLIENTE* reg)
 {
+	//Mostrar cabecera
 	GotoXY(20, 0);
 	printf("FICHERO CLIENTES");
 	
+	//Almacenar numero del siguiente cliente y mostrarlo
 	GotoXY(0, 2);
 	reg->nCliente = numSiguienteCliente;
 	printf("%15s : %d ","NºCliente",numSiguienteCliente);
-	
+
+	//Pedir nombre
 	GotoXY(0, 4);
 	printf("%15s :","Nombre");
 	GotoXY(17, 4);
 	gets(reg->nombre);
 	
+	//Pedir domicilio
 	GotoXY(0, 6);
 	printf("%15s :", "Domicilio");
 	GotoXY(17, 6);
 	gets(reg->domicilio);
 
+	//Pedir codigo postal
 	GotoXY(0, 8);
 	printf("%15s :", "Codigo Postal");
 	GotoXY(17, 8);
 	gets(reg->codigoPostal);
 
+	//Pedir municipio
 	GotoXY(0, 10);
 	printf("%15s :", "Municipio");
 	GotoXY(17, 10);
 	gets(reg->municipio);
 
+	//Pedir nif
 	GotoXY(0, 12);
 	printf("%15s :", "NIF");
 	GotoXY(17, 12);
@@ -261,6 +268,7 @@ long calcularTamañoFichero(FILE *pf) {
 void consultarCliente() {
 	FILE* pf;
 	CLIENTE reg;
+
 	/*Intentamos abrir el fichero en modo lectura */
 	pf = fopen(RUTA_CLIENTES, "rb");
 
@@ -279,6 +287,7 @@ void consultarCliente() {
 	if (pos<1 || pos>numUltimoCliente)
 	{
 		printf("Error el numero de cliente no esta entre los existentes");
+		getch();
 		return;
 	}
 	/*Nos situamos en el cliente que nos ha insertado el usuario */
@@ -289,6 +298,9 @@ void consultarCliente() {
 
 	imprimirDatosCliente(reg);
 
+	fclose(pf);
+
+	GotoXY(0, 14);
 	printf("Desea continuar?");
 
 	getch();
@@ -324,42 +336,71 @@ int pedirNumCliente() {
 	scanf("%d", &numCliente);
 	return numCliente;
 }
-//void darDeAltaServicio() {
-//	FILE* pf;
-//	SERVICIO reg;
-//	/*Intentamos abrir el fichero en modo lectura escritura*/
-//	pf = fopen(RUTA_SERVICIOS, "rb+");
-//	if (pf == NULL)/*Si da error intentamor abrirlo en modo lectura*/
-//	{
-//		pf = fopen(RUTA_SERVICIOS, "wb");
-//		if (pf == NULL)/*Si da error imprimir mensaje error*/
-//		{
-//			printf("Error de apertura");
-//			return;
-//		}
-//	}
-//
-//	int tamFichero = calcularTamañoFichero(pf);
-//
-//	/*Calcular numero del siguiente servicio*/
-//	int posSiguienteServicio = tamFichero / sizeof(reg);
-//
-//	/*Sacamos formulario de pedir datos del servicio*/
-//	pedirDatosServicio(posSiguienteServicio+1, &reg);
-//
-//	/*Posicionarnos al final del fichero*/
-//	fseek(pf, tamFichero, SEEK_SET);
-//
-//	/*Escribir el registro*/
-//	fwrite(&reg, sizeof(reg), 1, pf);
-//
-//	/*Cerrar el fichero*/
-//	fclose(pf);
-//
-//	/*Imprimir mensaje diciendo servicio insertado con exito*/
-//	printf("Servicio insertado con exito");
-//}
-//
+void darDeAltaServicio() {
+	FILE* pf;
+	SERVICIO reg;
+	/*Intentamos abrir el fichero en modo lectura escritura*/
+	pf = fopen(RUTA_SERVICIOS, "rb+");
+	if (pf == NULL)/*Si da error intentamor abrirlo en modo lectura*/
+	{
+		pf = fopen(RUTA_SERVICIOS, "wb");
+		if (pf == NULL)/*Si da error imprimir mensaje error*/
+		{
+			printf("Error de apertura");
+			return;
+		}
+	}
+
+	int tamFichero = calcularTamañoFichero(pf);
+
+	/*Calcular numero del siguiente servicio*/
+	int posSiguienteServicio = tamFichero / sizeof(reg);
+
+	/*Sacamos formulario de pedir datos del servicio*/
+	pedirDatosServicio(posSiguienteServicio+1, &reg);
+
+	/*Posicionarnos al final del fichero*/
+	fseek(pf, tamFichero, SEEK_SET);
+
+	/*Escribir el registro*/
+	fwrite(&reg, sizeof(reg), 1, pf);
+
+	/*Cerrar el fichero*/
+	fclose(pf);
+
+	/*Imprimir mensaje diciendo servicio insertado con exito*/
+	printf("Servicio insertado con exito");
+}
+
+void pedirDatosServicio(int numSiguienteServicio, SERVICIO* reg) {
+	//Mostrar cabecera
+	GotoXY(20, 0);
+	printf("FICHERO SERVICIOS");
+
+	//Almacenar numSiguienteServicio y mostrarlo
+	GotoXY(0, 2);
+	reg->nServicio = numSiguienteServicio;
+	printf("%15s : %d ", "N.Servicio", numSiguienteServicio);
+
+	//Pedir denominacion
+	GotoXY(0, 4);
+	printf("%15s :", "Denominacion");
+	GotoXY(17, 4);
+	gets(reg->denominacion);
+
+	//Pedir precio coste
+	GotoXY(0, 6);
+	printf("%15s :", "Precio Coste");
+	GotoXY(17, 6);
+	scanf("%f", &reg->precioCoste);
+
+	//Pedir pvp
+	GotoXY(0, 8);
+	printf("%15s :", "PVP");
+	GotoXY(17, 8);
+	scanf("%f", &reg->pvp);
+}
+
 //void modificarServicio() {
 //	FILE* pf;
 //	SERVICIO reg;
@@ -405,38 +446,72 @@ int pedirNumCliente() {
 //	printf("Cliente modificado con exito");
 //}
 //
-//void consultarServicio() {
-//	FILE* pf;
-//	SERVICIO reg;
-//	/*Intentamos abrir el fichero en modo lectura*/
-//	pf = fopen(RUTA_SERVICIOS, "rb");
-//
-//	if (pf == NULL) {/*Si da error es imposible modificar porque no existe el fichero*/
-//		printf("Error no se puede consultar ningun servicio porque no existe el fichero");
-//		return;
-//	}
-//	int tamFichero = calcularTamañoFichero(pf);
-//
-//	/*Calcular numero del ultimo cliente*/
-//	int numUltimoCliente = tamFichero / sizeof(reg);
-//
-//	/*Pedir numero cliente*/
-//	int pos = pedirNumCliente();
-//
-//	if (pos<1 || pos>numUltimoCliente)
-//	{
-//		printf("Error el numero de servicio no esta entre los existentes");
-//		return;
-//	}
-//	/*Nos situamos en el cliente que nos ha insertado el usuario */
-//	fseek(pf, sizeof(reg) * (pos - 1), SEEK_SET);
-//
-//	/*Leemos los datos del cliente solicitado*/
-//	fread(&reg, sizeof(reg), 1, pf);
-//
-//	imprimirDatosServicio(reg);
-//
-//	printf("Desea continuar?");
-//
-//	getch();
-//}
+void consultarServicio() {
+	FILE* pf;
+	SERVICIO reg;
+	/*Intentamos abrir el fichero en modo lectura*/
+	pf = fopen(RUTA_SERVICIOS, "rb");
+
+	if (pf == NULL) {/*Si da error es imposible modificar porque no existe el fichero*/
+		printf("Error no se puede consultar ningun servicio porque no existe el fichero");
+		return;
+	}
+	int tamFichero = calcularTamañoFichero(pf);
+
+	/*Calcular numero del ultimo servicio*/
+	int numUltimoServicio = tamFichero / sizeof(reg);
+
+	/*Pedir numero servicio*/
+	int pos = pedirNumServicio();
+
+	/*Si el numero de servicio no existe*/
+	if (pos<1 || pos>numUltimoServicio)
+	{
+		printf("Error el numero de servicio no esta entre los existentes");
+		getche();
+		fclose(pf);
+		return;
+	}
+	/*Nos situamos en el servicio que nos ha insertado el usuario */
+	fseek(pf, sizeof(reg) * (pos - 1), SEEK_SET);
+
+	/*Leemos los datos del servicio solicitado*/
+	fread(&reg, sizeof(reg), 1, pf);
+
+	imprimirDatosServicio(reg);
+
+	fclose(pf);
+
+	printf("Desea continuar?");
+
+	getche();
+}
+
+void imprimirDatosServicio(SERVICIO reg) {
+	//Imprimir cabecera
+	GotoXY(20, 0);
+	printf("CONSULTA SERVICIOS");
+
+	//Imprimir numero de servicio
+	GotoXY(0, 2);
+	printf("%15s : %d ", "N.Servicio", reg.nServicio);
+
+	//Imprimir denominacion
+	GotoXY(0, 4);
+	printf("%15s : %-20s", "Denominacion", reg.denominacion);
+
+	//Imprimir precio coste
+	GotoXY(0, 6);
+	printf("%15s : %-10.2f", "Precio coste", reg.precioCoste);
+
+	//Imprimir pvp
+	GotoXY(0, 8);
+	printf("%15s : %-10.2f", "PVP", reg.pvp);
+}
+
+int pedirNumServicio() {
+	int nServicio;
+	printf("Introduzca numero de servicio: ");
+	scanf("%d", &nServicio);
+	return nServicio;
+}
