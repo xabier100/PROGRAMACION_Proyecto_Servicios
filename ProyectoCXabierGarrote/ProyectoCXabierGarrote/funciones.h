@@ -50,9 +50,9 @@ void pedirDatosCliente(int numSiguienteCliente,CLIENTE *reg);
 long calcularTamañoFichero(FILE *pf);
 
 void modificarCliente();
-
 void pedirDatosModificarCliente(CLIENTE *reg);
 int pedirOpcionModificarCliente();
+void imprimirDatosModificablesCliente(CLIENTE* reg);
 void pedirNombre(CLIENTE* reg);
 void pedirDomicilio(CLIENTE* reg);
 void pedirCodigoPostal(CLIENTE* reg);
@@ -60,17 +60,22 @@ void pedirNif(CLIENTE* reg);
 void pedirMunicipio(CLIENTE* reg);
 
 void consultarCliente();
-void imprimirDatosModificables(CLIENTE* reg);
 void imprimirDatosCliente(CLIENTE reg);
 int  pedirNumCliente();
 
 void darDeAltaServicio();
 void pedirDatosServicio(int numSiguienteServicio, SERVICIO* reg);
 
-//void modificarServicio();
-//int pedirNumServicio();
-//void pedirDatosModificarServicio(SERVICIO* reg);
-//
+void modificarServicio();
+void pedirDatosModificarServicio(SERVICIO* reg);
+int pedirOpcionModificarServicio();
+void imprimirDatosModificablesServicio(SERVICIO* reg);
+void pedirDenominacion(SERVICIO* reg);
+void pedirPrecioCoste(SERVICIO* reg);
+void pedirPVP(SERVICIO* reg);
+
+
+
 void consultarServicio();
 void imprimirDatosServicio(SERVICIO reg);
 int pedirNumServicio();

@@ -162,7 +162,6 @@ void darDeAltaCliente() {
 
 	getch();
 }
-
 void pedirDatosCliente(int numSiguienteCliente, CLIENTE* reg)
 {
 	//Mostrar cabecera
@@ -204,7 +203,6 @@ void pedirDatosCliente(int numSiguienteCliente, CLIENTE* reg)
 	GotoXY(17, 12);
 	gets(reg->nif);
 }
-
 long calcularTamañoFichero(FILE *pf) {
 	long tam;
 	/* posicionamiento en el final del fichero  */
@@ -243,6 +241,7 @@ void modificarCliente() {
 	if (pos<1||pos>numUltimoCliente)
 	{
 		printf("Error el numero de cliente no esta entre los existentes");
+		getche();
 		return;
 	}
 	
@@ -252,6 +251,7 @@ void modificarCliente() {
 	/*Leemos los datos del cliente solicitado*/
 	fread(&reg, sizeof(reg), 1, pf);
 
+	system("cls");
 	pedirDatosModificarCliente(&reg);
 
 	/*Nos situamos en el fichero*/
@@ -266,13 +266,11 @@ void modificarCliente() {
 	/*Imprimir mensaje confirmando que todo ha salido bien*/
 	printf("Cliente modificado con exito");
 }
-
-
 void pedirDatosModificarCliente(CLIENTE* reg)
 {
 	void(*punteroOpcionesACambiar[5])(CLIENTE *reg) = { pedirNombre,pedirDomicilio,pedirCodigoPostal,pedirMunicipio,pedirNif };
 
-	imprimirDatosModificables(reg);
+	imprimirDatosModificablesCliente(reg);
 	int opc = pedirOpcionModificarCliente();
 	
 	while (opc != 6) {
@@ -282,12 +280,11 @@ void pedirDatosModificarCliente(CLIENTE* reg)
 		printf("Continuar?");
 		getche();
 		system("cls");
-		imprimirDatosModificables(reg);
+		imprimirDatosModificablesCliente(reg);
 		opc = pedirOpcionModificarCliente();
 	}
 
 }
-
 int pedirOpcionModificarCliente()
 {
 	int opc;
@@ -298,7 +295,6 @@ int pedirOpcionModificarCliente()
 	rewind(stdin);
 	return opc;
 }
-
 void pedirNombre(CLIENTE* reg) {
 	printf("Introduzca nombre: ");
 	gets(reg->nombre);
@@ -319,8 +315,7 @@ void pedirNif(CLIENTE* reg) {
 	printf("Introduzca nif: ");
 	gets(reg->nif);
 }
-
-void imprimirDatosModificables(CLIENTE* reg)
+void imprimirDatosModificablesCliente(CLIENTE* reg)
 {
 	GotoXY(20, 0);
 	printf("MODIFICACION CLIENTE");
@@ -342,6 +337,9 @@ void imprimirDatosModificables(CLIENTE* reg)
 
 	GotoXY(0, 12);
 	printf("%d  %15s : %-10s", 5, "NIF", reg->nif);
+
+	GotoXY(0, 14);
+	printf("%d  %15s : ", 6, "SALIR");
 }
 
 
@@ -386,8 +384,6 @@ void consultarCliente() {
 
 	getch();
 }
-
-
 void imprimirDatosCliente(CLIENTE reg) {
 	GotoXY(20, 0);
 	printf("CONSULTA CLIENTES");
@@ -410,13 +406,13 @@ void imprimirDatosCliente(CLIENTE reg) {
 	GotoXY(0, 12);
 	printf("%15s : %-10s", "NIF",reg.nif);
 }
-
 int pedirNumCliente() {
 	int numCliente;
 	printf("Introduzca numero de cliente: ");
 	scanf("%d", &numCliente);
 	return numCliente;
 }
+
 void darDeAltaServicio() {
 	FILE* pf;
 	SERVICIO reg;
@@ -452,7 +448,6 @@ void darDeAltaServicio() {
 	/*Imprimir mensaje diciendo servicio insertado con exito*/
 	printf("Servicio insertado con exito");
 }
-
 void pedirDatosServicio(int numSiguienteServicio, SERVICIO* reg) {
 	//Mostrar cabecera
 	GotoXY(20, 0);
@@ -482,51 +477,119 @@ void pedirDatosServicio(int numSiguienteServicio, SERVICIO* reg) {
 	scanf("%f", &reg->pvp);
 }
 
-//void modificarServicio() {
-//	FILE* pf;
-//	SERVICIO reg;
-//	/*Intentamos abrir el fichero en modo lectura escritura*/
-//	pf = fopen(RUTA_SERVICIOS, "rb+");
-//
-//	if (pf == NULL) {/*Si da error es imposible modificar porque no existe el fichero*/
-//		printf("Error no se puede modificar ningun servicio porque no existe el fichero");
-//		return;
-//	}
-//	int tamFichero = calcularTamañoFichero(pf);
-//
-//	/*Calcular numero del ultimo cliente*/
-//	int numUltimoServicio = tamFichero / sizeof(reg);
-//
-//	/*Pedir numero cliente*/
-//	int pos = pedirNumServicio();
-//
-//	if (pos<1 || pos>numUltimoServicio)
-//	{
-//		printf("Error el numero de cliente no esta entre los existentes");
-//		return;
-//	}
-//
-//	/*Nos situamos en el cliente que nos ha insertado el usuario */
-//	fseek(pf, sizeof(reg) * (pos - 1), SEEK_SET);
-//
-//	/*Leemos los datos del cliente solicitado*/
-//	fread(&reg, sizeof(reg), 1, pf);
-//
-//	pedirDatosModificarServicio(&reg);
-//
-//	/*Nos situamos en el fichero*/
-//	fseek(pf, sizeof(reg) * (pos - 1), SEEK_SET);
-//
-//	/*Insertamos el cliente con los datos modificados*/
-//	fwrite(&reg, sizeof(reg), 1, pf);
-//
-//	/*Cerramos el fichero*/
-//	fclose(pf);
-//
-//	/*Imprimir mensaje confirmando que todo ha salido bien*/
-//	printf("Cliente modificado con exito");
-//}
-//
+void modificarServicio() {
+	FILE* pf;
+	SERVICIO reg;
+	/*Intentamos abrir el fichero en modo lectura escritura*/
+	pf = fopen(RUTA_SERVICIOS, "rb+");
+
+	if (pf == NULL) {/*Si da error es imposible modificar porque no existe el fichero*/
+		printf("Error no se puede modificar ningun servicio porque no existe el fichero");
+		return;
+	}
+	int tamFichero = calcularTamañoFichero(pf);
+
+	/*Calcular numero del ultimo cliente*/
+	int numUltimoServicio = tamFichero / sizeof(reg);
+
+	/*Pedir numero cliente*/
+	int pos = pedirNumServicio();
+
+	if (pos<1 || pos>numUltimoServicio)
+	{
+		printf("Error el numero de cliente no esta entre los existentes");
+		return;
+	}
+
+	/*Nos situamos en el cliente que nos ha insertado el usuario */
+	fseek(pf, sizeof(reg) * (pos - 1), SEEK_SET);
+
+	/*Leemos los datos del cliente solicitado*/
+	fread(&reg, sizeof(reg), 1, pf);
+
+	pedirDatosModificarServicio(&reg);
+
+	/*Nos situamos en el fichero*/
+	fseek(pf, sizeof(reg) * (pos - 1), SEEK_SET);
+
+	/*Insertamos el cliente con los datos modificados*/
+	fwrite(&reg, sizeof(reg), 1, pf);
+
+	/*Cerramos el fichero*/
+	fclose(pf);
+
+	/*Imprimir mensaje confirmando que todo ha salido bien*/
+	printf("Cliente modificado con exito");
+}
+
+
+void pedirDatosModificarServicio(SERVICIO *reg) {
+
+	void(*punteroOpcionesACambiar[3])(SERVICIO * reg) = {pedirDenominacion,pedirPrecioCoste,pedirPVP};
+	imprimirDatosModificablesServicio(reg);
+
+	int opc = pedirOpcionModificarServicio();
+
+	while (opc != 4) {
+		system("cls");
+		(*punteroOpcionesACambiar[opc - 1])(reg);
+		printf("Dato modificado con exito");
+		printf("\nDesea continuar?");
+		getche();
+		system("cls");
+		imprimirDatosModificablesServicio(reg);
+		opc = pedirOpcionModificarServicio();
+	}
+}
+int pedirOpcionModificarServicio() {
+	int opc;
+	do {
+		printf("\n\nIntroduzca que dato deseas modificar?");
+		scanf("%d", &opc);
+	} while (opc < 1 || opc>4);
+	rewind(stdin);
+	return opc;
+}
+void pedirDenominacion(SERVICIO* reg) {
+	printf("Introduzca denominacion: ");
+	gets(reg->denominacion);
+}
+void pedirPrecioCoste(SERVICIO* reg) {
+	printf("Introduzca precio coste: ");
+	scanf("%f", &reg->precioCoste);
+}
+void pedirPVP(SERVICIO* reg) {
+	printf("Introduzca PVP: ");
+	scanf("%f", &reg->pvp);
+}
+void imprimirDatosModificablesServicio(SERVICIO* reg)
+{
+	//Imprimir cabecera
+	GotoXY(20, 0);
+	printf("MODIFICACION SERVICIOS");
+
+	//Imprimir numero de servicio
+	GotoXY(0, 2);
+	printf("%15s : %d ", "N.Servicio", reg->nServicio);
+
+	//Imprimir denominacion
+	GotoXY(0, 4);
+	printf("%d %15s : %-20s", 1, "Denominacion", reg->denominacion);
+
+	//Imprimir precio coste
+	GotoXY(0, 6);
+	printf("%d %15s : %-10.2f", 2, "Precio coste", reg->precioCoste);
+
+	//Imprimir pvp
+	GotoXY(0, 8);
+	printf("%d %15s : %-10.2f", 3, "PVP", reg->pvp);
+
+	GotoXY(0, 10);
+	printf("%d %15s :", 4, "SALIR");
+
+}
+
+
 void consultarServicio() {
 	FILE* pf;
 	SERVICIO reg;
@@ -567,7 +630,6 @@ void consultarServicio() {
 
 	getche();
 }
-
 void imprimirDatosServicio(SERVICIO reg) {
 	//Imprimir cabecera
 	GotoXY(20, 0);
@@ -589,7 +651,6 @@ void imprimirDatosServicio(SERVICIO reg) {
 	GotoXY(0, 8);
 	printf("%15s : %-10.2f", "PVP", reg.pvp);
 }
-
 int pedirNumServicio() {
 	int nServicio;
 	printf("Introduzca numero de servicio: ");

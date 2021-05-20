@@ -23,16 +23,15 @@ main() {
 	//pedirDatosCliente(numSiguienteCliente, &reg);
 	//reg.nombre;
 
-	//CLIENTE reg;
-	//reg.nCliente = 1;
-	//strcpy(reg.codigoPostal, "20100");
-	//strcpy(reg.domicilio, "Arretxene 1");
-	//strcpy(reg.municipio, "Lezo");
-	//strcpy(reg.nombre, "Super");
-	//strcpy(reg.nif, "999999");
-	//pedirDatosModificarCliente(&reg);
+	/*SERVICIO reg;
+	reg.nServicio = 1;
+	strcpy(reg.denominacion, "Servicio 1");
+	reg.precioCoste = 7.7;
+	reg.pvp = 10;
+	pedirDatosModificarServicio(&reg);*/
 
-	modificarCliente();
+	modificarServicio();
+	
 	
 }
 
