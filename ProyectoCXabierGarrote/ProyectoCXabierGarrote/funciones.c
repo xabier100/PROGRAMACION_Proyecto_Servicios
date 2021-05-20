@@ -220,51 +220,132 @@ long calcularTamañoFichero(FILE *pf) {
 	return tam;
 }
 
-//void modificarCliente() {
-//	FILE* pf;
-//	CLIENTE reg;
-//	/*Intentamos abrir el fichero en modo lectura escritura*/
-//	pf= fopen(RUTA_CLIENTES, "rb+");
-//
-//	if (pf == NULL) {/*Si da error es imposible modificar porque no existe el fichero*/
-//		printf("Error no se puede modificar ningun cliente porque no existe el fichero");
-//		return;
-//	}
-//	int tamFichero = calcularTamañoFichero(pf);
-//
-//	/*Calcular numero del ultimo cliente*/
-//	int numUltimoCliente = tamFichero / sizeof(reg);
-//	
-//	/*Pedir numero cliente*/
-//	int pos = pedirNumCliente();
-//
-//	if (pos<1||pos>numUltimoCliente)
-//	{
-//		printf("Error el numero de cliente no esta entre los existentes");
-//		return;
-//	}
-//	
-//	/*Nos situamos en el cliente que nos ha insertado el usuario */
-//	fseek(pf, sizeof(reg) * (pos - 1), SEEK_SET);
-//
-//	/*Leemos los datos del cliente solicitado*/
-//	fread(&reg, sizeof(reg), 1, pf);
-//
-//	pedirDatosModificarCliente(&reg);
-//
-//	/*Nos situamos en el fichero*/
-//	fseek(pf, sizeof(reg) * (pos - 1), SEEK_SET);
-//
-//	/*Insertamos el cliente con los datos modificados*/
-//	fwrite(&reg, sizeof(reg), 1, pf);
-//
-//	/*Cerramos el fichero*/
-//	fclose(pf);
-//
-//	/*Imprimir mensaje confirmando que todo ha salido bien*/
-//	printf("Cliente modificado con exito");
-//}
-//
+
+
+void modificarCliente() {
+	FILE* pf;
+	CLIENTE reg;
+	/*Intentamos abrir el fichero en modo lectura escritura*/
+	pf= fopen(RUTA_CLIENTES, "rb+");
+
+	if (pf == NULL) {/*Si da error es imposible modificar porque no existe el fichero*/
+		printf("Error no se puede modificar ningun cliente porque no existe el fichero");
+		return;
+	}
+	int tamFichero = calcularTamañoFichero(pf);
+
+	/*Calcular numero del ultimo cliente*/
+	int numUltimoCliente = tamFichero / sizeof(reg);
+	
+	/*Pedir numero cliente*/
+	int pos = pedirNumCliente();
+
+	if (pos<1||pos>numUltimoCliente)
+	{
+		printf("Error el numero de cliente no esta entre los existentes");
+		return;
+	}
+	
+	/*Nos situamos en el cliente que nos ha insertado el usuario */
+	fseek(pf, sizeof(reg) * (pos - 1), SEEK_SET);
+
+	/*Leemos los datos del cliente solicitado*/
+	fread(&reg, sizeof(reg), 1, pf);
+
+	pedirDatosModificarCliente(&reg);
+
+	/*Nos situamos en el fichero*/
+	fseek(pf, sizeof(reg) * (pos - 1), SEEK_SET);
+
+	/*Insertamos el cliente con los datos modificados*/
+	fwrite(&reg, sizeof(reg), 1, pf);
+
+	/*Cerramos el fichero*/
+	fclose(pf);
+
+	/*Imprimir mensaje confirmando que todo ha salido bien*/
+	printf("Cliente modificado con exito");
+}
+
+
+void pedirDatosModificarCliente(CLIENTE* reg)
+{
+	void(*punteroOpcionesACambiar[5])(CLIENTE *reg) = { pedirNombre,pedirDomicilio,pedirCodigoPostal,pedirMunicipio,pedirNif };
+
+	imprimirDatosModificables(reg);
+	int opc = pedirOpcionModificarCliente();
+	
+	while (opc != 6) {
+		system("cls");
+		(*punteroOpcionesACambiar[opc - 1])(reg);
+		printf("Dato modificado con exito\n");
+		printf("Continuar?");
+		getche();
+		system("cls");
+		imprimirDatosModificables(reg);
+		opc = pedirOpcionModificarCliente();
+	}
+
+}
+
+int pedirOpcionModificarCliente()
+{
+	int opc;
+	do {
+		printf("\n\nIntroduzca que dato del cliente desea modificar: ");
+		scanf("%d", &opc);
+	} while (opc < 1 || opc>6);
+	rewind(stdin);
+	return opc;
+}
+
+void pedirNombre(CLIENTE* reg) {
+	printf("Introduzca nombre: ");
+	gets(reg->nombre);
+}
+void pedirDomicilio(CLIENTE* reg) {
+	printf("Introduzca domicilio: ");
+	gets(reg->domicilio);
+}
+void pedirCodigoPostal(CLIENTE* reg) {
+	printf("Introduzca codigo postal: ");
+	gets(reg->codigoPostal);
+}
+void pedirMunicipio(CLIENTE* reg) {
+	printf("Introduzca municipio: ");
+	gets(reg->municipio);
+}
+void pedirNif(CLIENTE* reg) {
+	printf("Introduzca nif: ");
+	gets(reg->nif);
+}
+
+void imprimirDatosModificables(CLIENTE* reg)
+{
+	GotoXY(20, 0);
+	printf("MODIFICACION CLIENTE");
+
+	GotoXY(0, 2);
+	printf("  %15s : %d ","N.Cliente", reg->nCliente);
+
+	GotoXY(0, 4);
+	printf("%d  %15s : %-20s", 1, "Nombre", reg->nombre);
+
+	GotoXY(0, 6);
+	printf("%d  %15s : %-20s", 2, "Domicilio", reg->domicilio);
+
+	GotoXY(0, 8);
+	printf("%d  %15s : %-10s", 3, "Codigo Postal", reg->codigoPostal);
+
+	GotoXY(0, 10);
+	printf("%d  %15s : %-15s", 4, "Municipio", reg->municipio);
+
+	GotoXY(0, 12);
+	printf("%d  %15s : %-10s", 5, "NIF", reg->nif);
+}
+
+
+
 void consultarCliente() {
 	FILE* pf;
 	CLIENTE reg;

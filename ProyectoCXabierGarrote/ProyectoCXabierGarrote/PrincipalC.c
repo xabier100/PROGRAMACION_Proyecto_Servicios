@@ -23,7 +23,16 @@ main() {
 	//pedirDatosCliente(numSiguienteCliente, &reg);
 	//reg.nombre;
 
-	consultarServicio();
+	//CLIENTE reg;
+	//reg.nCliente = 1;
+	//strcpy(reg.codigoPostal, "20100");
+	//strcpy(reg.domicilio, "Arretxene 1");
+	//strcpy(reg.municipio, "Lezo");
+	//strcpy(reg.nombre, "Super");
+	//strcpy(reg.nif, "999999");
+	//pedirDatosModificarCliente(&reg);
+
+	modificarCliente();
 	
 }
 

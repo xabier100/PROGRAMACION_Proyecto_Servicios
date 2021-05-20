@@ -49,11 +49,18 @@ void pedirDatosCliente(int numSiguienteCliente,CLIENTE *reg);
 
 long calcularTamañoFichero(FILE *pf);
 
-//void modificarCliente();
-//int pedirNumCliente();
-//void pedirDatosModificarCliente(CLIENTE *reg);
-//
+void modificarCliente();
+
+void pedirDatosModificarCliente(CLIENTE *reg);
+int pedirOpcionModificarCliente();
+void pedirNombre(CLIENTE* reg);
+void pedirDomicilio(CLIENTE* reg);
+void pedirCodigoPostal(CLIENTE* reg);
+void pedirNif(CLIENTE* reg);
+void pedirMunicipio(CLIENTE* reg);
+
 void consultarCliente();
+void imprimirDatosModificables(CLIENTE* reg);
 void imprimirDatosCliente(CLIENTE reg);
 int  pedirNumCliente();
 
