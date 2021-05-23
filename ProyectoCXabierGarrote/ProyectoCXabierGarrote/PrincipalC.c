@@ -2,36 +2,20 @@
 #include <stdio.h>
 #include "funciones.h"
 #include <Windows.h>
-#define TAM_OPCIONES 5
+#define TAM_OPCIONES_PRINCIPALES 5
 main() {
-	///*void (*menuPuntero[TAM_OPCIONES - 1])() = {mostrarMenuClientes,mostrarMenuServicios,presupuestos,facuracion};*/
-	//void (*menuPuntero[TAM_OPCIONES - 1])() = { mostrarMenuClientes,mostrarMenuServicios,funcion3,funcion4 };
+	void (*menuPuntero[TAM_OPCIONES_PRINCIPALES - 1])() = { mostrarMenuClientes,mostrarMenuServicios,hacerPresupuestos,hacerFacturas };
 
-	//mostrarOpcionesPrincipales();
-	//int opc = pedirOpcionPrincipal();
-	//while (opc!=TAM_OPCIONES)
-	//{
-	//	system("cls");
-	//	(*menuPuntero[opc-1])();
-	//	system("cls");
-	//	getch();
-	//	mostrarOpcionesPrincipales();
-	//	opc = pedirOpcionPrincipal();
-	//}
-	//CLIENTE reg;
-	//int numSiguienteCliente=1;
-	//pedirDatosCliente(numSiguienteCliente, &reg);
-	//reg.nombre;
-
-	/*SERVICIO reg;
-	reg.nServicio = 1;
-	strcpy(reg.denominacion, "Servicio 1");
-	reg.precioCoste = 7.7;
-	reg.pvp = 10;
-	pedirDatosModificarServicio(&reg);*/
-
-	modificarServicio();
+	mostrarOpcionesPrincipales();
+	int opc = pedirOpcionPrincipal();
 	
-	
+	while (opc!=TAM_OPCIONES_PRINCIPALES)
+	{
+		system("cls");
+		(*menuPuntero[opc-1])();
+		system("cls");
+		mostrarOpcionesPrincipales();
+		opc = pedirOpcionPrincipal();
+	}
 }
 

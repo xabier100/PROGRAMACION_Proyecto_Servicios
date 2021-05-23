@@ -1,5 +1,7 @@
 #pragma once
 #include <windows.h>
+#define _CRT_SECURE_NO_WARNINGS
+#include <stdio.h>
 #define TAM_OPCIONES_CLIENTES 4
 #define TAM_OPCIONES_SERVICIOS 4
 #define RUTA_CLIENTES "clientes.dat"
@@ -33,20 +35,17 @@ typedef struct {
 void mostrarOpcionesPrincipales();
 int pedirOpcionPrincipal();
 void GotoXY(int x, int  y);
-void funcion1();
-void funcion2();
-void funcion3();
-void funcion4();
+
 void mostrarMenuClientes();
 void mostrarOpcionesClientes();
 int pedirOpcionClientes();
+
 void mostrarMenuServicios();
 void mostrarOpcionesServicios();
 int pedirOpcionServicios();
 
 void darDeAltaCliente();
 void pedirDatosCliente(int numSiguienteCliente,CLIENTE *reg);
-
 long calcularTamañoFichero(FILE *pf);
 
 void modificarCliente();
@@ -74,8 +73,9 @@ void pedirDenominacion(SERVICIO* reg);
 void pedirPrecioCoste(SERVICIO* reg);
 void pedirPVP(SERVICIO* reg);
 
-
-
 void consultarServicio();
 void imprimirDatosServicio(SERVICIO reg);
 int pedirNumServicio();
+
+void hacerPresupuestos();
+void hacerFacturas();

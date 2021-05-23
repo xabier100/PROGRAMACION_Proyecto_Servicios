@@ -1,7 +1,6 @@
 #define _CRT_SECURE_NO_WARNINGS
-#include <stdio.h>
 #include "funciones.h"
-
+#include <stdio.h>
 void mostrarOpcionesPrincipales()
 {
 	GotoXY(5, 0);
@@ -25,6 +24,7 @@ int pedirOpcionPrincipal() {
 		GotoXY(19, 6);
 		scanf("%d", &opc);
 	} while (opc < 1 || opc>6);
+	rewind(stdin);
 	return opc;
 }
 void GotoXY(int x, int  y)
@@ -36,21 +36,8 @@ void GotoXY(int x, int  y)
 	SetConsoleCursorPosition(h, p);
 }
 
-void funcion1() {
-	printf("Funcion1");
-}
-void funcion2() {
-	printf("Funcion2");
-}
-void funcion3() {
-	printf("Funcion3");
-}
-void funcion4() {
-	printf("Funcion4");
-}
-
 void mostrarMenuClientes(){
-	void (*menuPuntero[TAM_OPCIONES_CLIENTES - 1])() = { funcion1,funcion2,funcion3};
+	void (*menuPuntero[TAM_OPCIONES_CLIENTES - 1])() = { darDeAltaCliente,modificarCliente,consultarCliente};
 
 	mostrarOpcionesClientes();
 	int opc = pedirOpcionClientes();
@@ -58,7 +45,7 @@ void mostrarMenuClientes(){
 	{
 		system("cls");
 		(*menuPuntero[opc - 1])();
-		getch();
+		system("cls");
 		mostrarOpcionesClientes();
 		opc = pedirOpcionClientes();
 	}
@@ -83,11 +70,12 @@ int pedirOpcionClientes() {
 		GotoXY(19, 5);
 		scanf("%d", &opc);
 	} while (opc < 1 || opc>4);
+	rewind(stdin);
 	return opc;
 }
 
 void mostrarMenuServicios() {
-	void (*menuPuntero[TAM_OPCIONES_SERVICIOS - 1])() = { funcion1,funcion2,funcion3 };
+	void (*menuPuntero[TAM_OPCIONES_SERVICIOS - 1])() = { darDeAltaServicio,modificarServicio,consultarServicio };
 
 	mostrarOpcionesServicios();
 	int opc = pedirOpcionServicios();
@@ -95,12 +83,11 @@ void mostrarMenuServicios() {
 	{
 		system("cls");
 		(*menuPuntero[opc - 1])();
-		getch();
+		system("cls");
 		mostrarOpcionesServicios();
 		opc = pedirOpcionServicios();
 	}
 }
-
 int pedirOpcionServicios() {
 	int opc;
 	printf("Introduce Opcion: [ ]");
@@ -109,9 +96,9 @@ int pedirOpcionServicios() {
 		GotoXY(19, 5);
 		scanf("%d", &opc);
 	} while (opc < 1 || opc>4);
+	rewind(stdin);
 	return opc;
 }
-
 void mostrarOpcionesServicios() {
 	GotoXY(5, 0);
 	printf("MENU DE SERVICIOS\n");
@@ -219,7 +206,6 @@ long calcularTamañoFichero(FILE *pf) {
 }
 
 
-
 void modificarCliente() {
 	FILE* pf;
 	CLIENTE reg;
@@ -295,6 +281,32 @@ int pedirOpcionModificarCliente()
 	rewind(stdin);
 	return opc;
 }
+void imprimirDatosModificablesCliente(CLIENTE* reg)
+{
+	GotoXY(20, 0);
+	printf("MODIFICACION CLIENTE");
+
+	GotoXY(0, 2);
+	printf("  %15s : %d ", "N.Cliente", reg->nCliente);
+
+	GotoXY(0, 4);
+	printf("%d  %15s : %-20s", 1, "Nombre", reg->nombre);
+
+	GotoXY(0, 6);
+	printf("%d  %15s : %-20s", 2, "Domicilio", reg->domicilio);
+
+	GotoXY(0, 8);
+	printf("%d  %15s : %-10s", 3, "Codigo Postal", reg->codigoPostal);
+
+	GotoXY(0, 10);
+	printf("%d  %15s : %-15s", 4, "Municipio", reg->municipio);
+
+	GotoXY(0, 12);
+	printf("%d  %15s : %-10s", 5, "NIF", reg->nif);
+
+	GotoXY(0, 14);
+	printf("%d  %15s : ", 6, "SALIR");
+}
 void pedirNombre(CLIENTE* reg) {
 	printf("Introduzca nombre: ");
 	gets(reg->nombre);
@@ -315,33 +327,6 @@ void pedirNif(CLIENTE* reg) {
 	printf("Introduzca nif: ");
 	gets(reg->nif);
 }
-void imprimirDatosModificablesCliente(CLIENTE* reg)
-{
-	GotoXY(20, 0);
-	printf("MODIFICACION CLIENTE");
-
-	GotoXY(0, 2);
-	printf("  %15s : %d ","N.Cliente", reg->nCliente);
-
-	GotoXY(0, 4);
-	printf("%d  %15s : %-20s", 1, "Nombre", reg->nombre);
-
-	GotoXY(0, 6);
-	printf("%d  %15s : %-20s", 2, "Domicilio", reg->domicilio);
-
-	GotoXY(0, 8);
-	printf("%d  %15s : %-10s", 3, "Codigo Postal", reg->codigoPostal);
-
-	GotoXY(0, 10);
-	printf("%d  %15s : %-15s", 4, "Municipio", reg->municipio);
-
-	GotoXY(0, 12);
-	printf("%d  %15s : %-10s", 5, "NIF", reg->nif);
-
-	GotoXY(0, 14);
-	printf("%d  %15s : ", 6, "SALIR");
-}
-
 
 
 void consultarCliente() {
@@ -521,8 +506,6 @@ void modificarServicio() {
 	/*Imprimir mensaje confirmando que todo ha salido bien*/
 	printf("Cliente modificado con exito");
 }
-
-
 void pedirDatosModificarServicio(SERVICIO *reg) {
 
 	void(*punteroOpcionesACambiar[3])(SERVICIO * reg) = {pedirDenominacion,pedirPrecioCoste,pedirPVP};
@@ -550,18 +533,6 @@ int pedirOpcionModificarServicio() {
 	rewind(stdin);
 	return opc;
 }
-void pedirDenominacion(SERVICIO* reg) {
-	printf("Introduzca denominacion: ");
-	gets(reg->denominacion);
-}
-void pedirPrecioCoste(SERVICIO* reg) {
-	printf("Introduzca precio coste: ");
-	scanf("%f", &reg->precioCoste);
-}
-void pedirPVP(SERVICIO* reg) {
-	printf("Introduzca PVP: ");
-	scanf("%f", &reg->pvp);
-}
 void imprimirDatosModificablesServicio(SERVICIO* reg)
 {
 	//Imprimir cabecera
@@ -588,7 +559,18 @@ void imprimirDatosModificablesServicio(SERVICIO* reg)
 	printf("%d %15s :", 4, "SALIR");
 
 }
-
+void pedirDenominacion(SERVICIO* reg) {
+	printf("Introduzca denominacion: ");
+	gets(reg->denominacion);
+}
+void pedirPrecioCoste(SERVICIO* reg) {
+	printf("Introduzca precio coste: ");
+	scanf("%f", &reg->precioCoste);
+}
+void pedirPVP(SERVICIO* reg) {
+	printf("Introduzca PVP: ");
+	scanf("%f", &reg->pvp);
+}
 
 void consultarServicio() {
 	FILE* pf;
@@ -622,6 +604,7 @@ void consultarServicio() {
 	/*Leemos los datos del servicio solicitado*/
 	fread(&reg, sizeof(reg), 1, pf);
 
+	system("cls");
 	imprimirDatosServicio(reg);
 
 	fclose(pf);
@@ -656,4 +639,13 @@ int pedirNumServicio() {
 	printf("Introduzca numero de servicio: ");
 	scanf("%d", &nServicio);
 	return nServicio;
+}
+
+void hacerPresupuestos() {
+	printf("Opcion NO implementada por falta de tiempo :(");
+	getche();
+}
+void hacerFacturas() {
+	printf("Opcion no implementada por falta de tiempo :(");
+	getche();
 }
