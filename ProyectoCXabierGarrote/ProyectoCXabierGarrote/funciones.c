@@ -135,20 +135,29 @@ void darDeAltaCliente() {
 	/*Sacamos formulario de pedir datos del cliente*/
 	pedirDatosCliente(posSiguienteCliente+1, &reg);
 
-	/*Posicionarnos al final del fichero*/
-	fseek(pf, tamFichero, SEEK_SET);
+	pedirConfirmacionCliente();
+	char resp = toupper(getch());
+	/*Si la respuesta es si*/
+	if (resp == 'S') {
+		/*Posicionarnos al final del fichero*/
+		fseek(pf, tamFichero, SEEK_SET);
 
-	/*Escribir el registro*/
-	fwrite(&reg, sizeof(reg), 1, pf);
+		/*Escribir el registro*/
+		fwrite(&reg, sizeof(reg), 1, pf);
 
-	/*Cerrar el fichero*/
-	fclose(pf);
+		/*Cerrar el fichero*/
+		fclose(pf);
 
-	/*Imprimir mensaje diciendo cliente insertado con exito*/
-	printf("\nCliente insertado con exito");
-
-	getch();
+		/*Imprimir mensaje diciendo cliente insertado con exito*/
+		printf("\nCliente insertado con exito");
+		getch();
+	}
 }
+
+void pedirConfirmacionCliente() {
+	printf("¿Desea insertar este cliente?");
+}
+
 void pedirDatosCliente(int numSiguienteCliente, CLIENTE* reg)
 {
 	//Mostrar cabecera
@@ -158,7 +167,7 @@ void pedirDatosCliente(int numSiguienteCliente, CLIENTE* reg)
 	//Almacenar numero del siguiente cliente y mostrarlo
 	GotoXY(0, 2);
 	reg->nCliente = numSiguienteCliente;
-	printf("%15s : %d ","NºCliente",numSiguienteCliente);
+	printf("%15s : %d ","N.Cliente",numSiguienteCliente);
 
 	//Pedir nombre
 	GotoXY(0, 4);
@@ -347,7 +356,7 @@ void consultarCliente() {
 
 	/*Pedir numero cliente*/
 	int pos = pedirNumCliente();
-
+	system("cls");
 	if (pos<1 || pos>numUltimoCliente)
 	{
 		printf("Error el numero de cliente no esta entre los existentes");
@@ -421,17 +430,26 @@ void darDeAltaServicio() {
 	/*Sacamos formulario de pedir datos del servicio*/
 	pedirDatosServicio(posSiguienteServicio+1, &reg);
 
-	/*Posicionarnos al final del fichero*/
-	fseek(pf, tamFichero, SEEK_SET);
+	pedirConfirmacionServicio();
+	char resp = toupper(getch());
 
-	/*Escribir el registro*/
-	fwrite(&reg, sizeof(reg), 1, pf);
+	if (resp == 'S') {
+		/*Posicionarnos al final del fichero*/
+		fseek(pf, tamFichero, SEEK_SET);
 
-	/*Cerrar el fichero*/
-	fclose(pf);
+		/*Escribir el registro*/
+		fwrite(&reg, sizeof(reg), 1, pf);
 
-	/*Imprimir mensaje diciendo servicio insertado con exito*/
-	printf("Servicio insertado con exito");
+		/*Cerrar el fichero*/
+		fclose(pf);
+
+		/*Imprimir mensaje diciendo servicio insertado con exito*/
+		printf("Servicio insertado con exito");
+	}
+}
+void pedirConfirmacionServicio()
+{
+	printf("Desea guardar el servicio?");
 }
 void pedirDatosServicio(int numSiguienteServicio, SERVICIO* reg) {
 	//Mostrar cabecera
@@ -483,6 +501,7 @@ void modificarServicio() {
 	if (pos<1 || pos>numUltimoServicio)
 	{
 		printf("Error el numero de cliente no esta entre los existentes");
+		getch();
 		return;
 	}
 
@@ -492,6 +511,7 @@ void modificarServicio() {
 	/*Leemos los datos del cliente solicitado*/
 	fread(&reg, sizeof(reg), 1, pf);
 
+	system("cls");
 	pedirDatosModificarServicio(&reg);
 
 	/*Nos situamos en el fichero*/
