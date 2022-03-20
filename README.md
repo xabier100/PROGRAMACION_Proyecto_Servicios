@@ -82,35 +82,65 @@ PROGRAMA DE CLIENTES:
 PSEUDOCÓDIGO:
 
 Sacar el menu en pantalla y pedir opción.
+
 Hacer mientras no tecleeen la opción de salir.
+	
 	Si opción es 1: ¿Dónde se inicializa el fichero?--Calcular el tamaño del fichero y de ahí sacar cuantos registros ahí.
+		
 		Mirar si existe el fichero.
+		
 		Calcular nº del último registro grabado.
+		
 		Abrir fichero para añadir registros
+		
 		Sacar pantalla de petición de datos y nº del siguiente cliente
+		
 		Pedir resto de los datos
+		
 		Pedir conformidad y grabar si está conforme.
+		
 		Cerrar el fichero y salir al menú
+	
 	Si opción es 2:
+		
 		Mirar si existe el fichero.
+		
 		Calcular nº del último registro grabado.
+		
 		Abrir fichero para leer 
-		 Sacar pantalla de datos y pedir Nº Cliente
+		
+		Sacar pantalla de datos y pedir Nº Cliente
+		
 		Si el Nº Cliente está dentro de los límites 
+			
 			Visualizar el resto de los datos
+			
 			Pedir datos a modificar
+			
 			Pedir conformidad y regrabar si está conforme
+		
 		Si no está dentro de los límites, mensaje de error
+		
 		Cerrar el fichero y salir al menú
+	
 	Si opción es 3:
+		
 		Mirar si existe el fichero.
+		
 		Calcular nº del último registro grabado.
+		
 		Abrir fichero para leer 
-		 Sacar pantalla de datos y pedir Nº Cliente
+		
+		Sacar pantalla de datos y pedir Nº Cliente
+		
 		Si el Nº Cliente está dentro de los límites 
+			
 			Visualizar el resto de los datos
+			
 			Pedir continuar 
+		
 		Si no está dentro de los límites, mensaje de error
+		
 		Cerrar el fichero y salir al menú
 Fin de Hacer mientras
 
@@ -163,35 +193,64 @@ PROGRAMA DE SERVICIOS:
 PSEUDOCÓDIGO:
 
 Sacar el menu en pantalla y pedir opción.
+
 Hacer mientras no tecleeen la opción de salir.
+	
 	Si opción es 1:
+		
 		Mirar si existe el fichero.
+		
 		Calcular nº del último registro grabado.
+		
 		Abrir fichero para añadir registros
+		
 		Sacar pantalla de petición de datos y nº del siguiente servicio
+		
 		Pedir resto de los datos
+		
 		Pedir conformidad y grabar si está conforme.
+		
 		Cerrar el fichero y salir al menú
+	
 	Si opción es 2:
+		
 		Mirar si existe el fichero.
+		
 		Calcular nº del último registro grabado.
+		
 		Abrir fichero para leer 
-		 Sacar pantalla de datos y pedir Nº servicio
+		
+		Sacar pantalla de datos y pedir Nº servicio
+		
 		Si el Nº servicio está dentro de los límites 
+			
 			Visualizar el resto de los datos
+			
 			Pedir datos a modificar
+			
 			Pedir conformidad y regrabar si está conforme
+		
 		Si no está dentro de los límites, mensaje de error
+		
 		Cerrar el fichero y salir al menú
 	Si opción es 3:
+		
 		Mirar si existe el fichero.
+		
 		Calcular nº del último registro grabado.
+		
 		Abrir fichero para leer 
-		 Sacar pantalla de datos y pedir Nº Servicio
+		
+		Sacar pantalla de datos y pedir Nº Servicio
+		
 		Si el Nº Servicio está dentro de los límites 
+			
 			Visualizar el resto de los datos
+			
 			Pedir continuar 
+		
 		Si no está dentro de los límites, mensaje de error
+		
 		Cerrar el fichero y salir al menú
 Fin de Hacer mientras
 
